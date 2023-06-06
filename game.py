@@ -31,12 +31,11 @@ while True:
             pygame.quit()
             exit()
         if event.type == pygame.MOUSEBUTTONDOWN:
-            if player_rect.collidepoint(event.pos):
-                player_gravity = -20 # player jumps now up
+            if player_rect.collidepoint(event.pos) and player_rect.bottom >= 300: # only ALLOWS jump if player is on ground 
+                player_gravity = -20 # player jumps now up when user clicks on player
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_SPACE:
-                # print('jump')
-                player_gravity = -20 # player jumps now up
+            if event.key == pygame.K_SPACE and player_rect.bottom >= 300: # only ALLOWS jump if player is on ground
+                player_gravity = -20 # player jumps now up only when user presses spacebar input keyboard
 
     # draw all our elements
     screen.blit(sky_surface, (0, 0))
@@ -55,6 +54,8 @@ while True:
     # Player Jumping/Gravity
     player_gravity += 1 # want to move the player's gravity downwards
     player_rect.y += player_gravity
+    if player_rect.bottom >= 300: # creating the player rect bottom floor
+        player_rect.bottom = 300
 
     screen.blit(player_surf, player_rect)
 
