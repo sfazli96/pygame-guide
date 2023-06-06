@@ -30,12 +30,19 @@ while True:
             pygame.quit()
             exit()
         # if event.type == pygame.MOUSEMOTION:
-        #     # print(event.pos)
         #     if player_rect.collidepoint(event.pos): print('collision')
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_SPACE:
+                print('jump')
+
+        if event.type == pygame.KEYUP:
+            print('key up')
 
     # draw all our elements
     screen.blit(sky_surface, (0, 0))
     screen.blit(ground_surface, (0, 300))
+
+    # draw the rectangles, ellipses, etc
     pygame.draw.rect(screen, '#c0e8ec', score_rect) # 3 arguments display screen, color and score
     pygame.draw.rect(screen, '#c0e8ec', score_rect, 10)
     # pygame.draw.ellipse(screen, 'Brown', pygame.Rect(50, 200, 100, 100))
@@ -46,6 +53,12 @@ while True:
         snail_rect.left = 800
     screen.blit(snail_surface, snail_rect)
     screen.blit(player_surf, player_rect)
+
+    # Keyboard input
+    # print(pygame.key.get_pressed())
+    # keys = pygame.key.get_pressed()
+    # if keys[pygame.K_SPACE]:
+    #     print('jump')
 
     # print(player_rect.colliderect(snail_rect))
     # if player_rect.colliderect(snail_rect): # basic version of collision
