@@ -31,7 +31,7 @@ while True:
             pygame.quit()
             exit()
         if event.type == pygame.MOUSEBUTTONDOWN:
-            if player_rect.collidepoint(event.pos) and player_rect.bottom >= 300: # only ALLOWS jump if player is on ground 
+            if player_rect.collidepoint(event.pos) and player_rect.bottom >= 300: # only ALLOWS jump if player is on ground
                 player_gravity = -20 # player jumps now up when user clicks on player
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE and player_rect.bottom >= 300: # only ALLOWS jump if player is on ground
@@ -51,6 +51,7 @@ while True:
     if snail_rect.right <= 0:
         snail_rect.left = 800
     screen.blit(snail_surface, snail_rect)
+
     # Player Jumping/Gravity
     player_gravity += 1 # want to move the player's gravity downwards
     player_rect.y += player_gravity
@@ -73,6 +74,11 @@ while True:
     # if player_rect.collidepoint(mouse_pos):
     #     # print('Collision')
     #     print(pygame.mouse.get_pressed())
+
+    # collision for game
+    if snail_rect.colliderect(player_rect):
+        pygame.quit()
+        exit()
 
     # update everything
     pygame.display.update()
