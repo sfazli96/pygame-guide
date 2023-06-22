@@ -2,6 +2,14 @@ import pygame
 from sys import exit
 from random import randint
 
+class Player(pygame.sprite.Sprite):
+    def __init__(self):
+        super().__init__()
+        self.image = pygame.image.load('graphics/player/player_walk_1.png').convert_alpha()
+        self.rect = self.image.get_rect(midbottom = (200, 300))
+
+
+
 # display the score
 def display_score():
     current_time = int(pygame.time.get_ticks() / 1000) - start_time
@@ -56,6 +64,9 @@ test_font = pygame.font.Font(None, 50) # font type, font size
 game_active = False
 start_time = 0
 score = 0
+
+player = pygame.sprite.GroupSingle()
+player.add(Player())
 
 # test_surface = pygame.Surface((100,200)) # width, height
 # test_surface.fill('Red')
@@ -173,6 +184,7 @@ while True:
             player_rect.bottom = 300
         player_animation()
         screen.blit(player_surf, player_rect)
+        player.draw(screen)
 
         # Obstacle movement
         obstacle_rect_list = obstacle_movement(obstacle_rect_list)
